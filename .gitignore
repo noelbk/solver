@@ -1,0 +1,4 @@
+venv
+solver.egg-info
+*.pyc
+
