@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 import collections
 
+
 class Solver(object):
     """
 A solver for nondeterministic programming [1].  A nondeterministic
@@ -92,10 +93,12 @@ So, this restarts the function from scratch at every evaluation
             if_any_inst = self.if_any_stack[-1]
             if_any_inst.branch_count -= 1
             if if_any_inst.branch_count == 0 and not if_any_inst.locked:
-                # all my branches end in prune, so I must enable my else_none block
+                # all my branches end in prune, so I must enable my
+                # else_none block
                 if_any_inst.val = False
                 # push a new choice path that ends in my if_any
-                self.choice_stack.append(self.choices[:if_any_inst.choice_idx+1])
+                self.choice_stack.append(
+                    self.choices[:if_any_inst.choice_idx + 1])
 
         raise PruneException()
 
@@ -136,11 +139,14 @@ So, this restarts the function from scratch at every evaluation
         if_any_inst.locked = True
         return not if_any_inst.val
 
+
 class ChooseException(Exception):
     pass
 
+
 class PruneException(Exception):
     pass
+
 
 class IfAny(object):
     def __init__(self, choice_idx):
@@ -148,6 +154,7 @@ class IfAny(object):
         self.val = True
         self.locked = False
         self.branch_count = 1
+
 
 def solve(fn, *args, **kwargs):
     for r in Solver().solve(fn, *args, **kwargs):

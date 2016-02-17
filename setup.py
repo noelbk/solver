@@ -9,7 +9,7 @@ setup(name='solver',
       author='Noel Burton-Krahn',
       author_email='noel@burton-krahn.com',
       license='MIT',
-      packages=['solver'],
+      packages=['solver', 'predicates'],
       zip_safe=False,
       test_suite='tests',
       )
