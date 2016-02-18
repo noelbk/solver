@@ -362,7 +362,7 @@ def reserve(self, name, var, amount):
 @predicate
 def qcluster(self, name, build, net, nodes):
     net = self.locals.net.setdefault(net).watch().value()
-    nodes = self.locals.nodes.setdefault(nodes).watch().value()
+    nodes = self.getvar("nodes", nodes)
     self.require.qcluster_grandpa(self.name, net)
     for i in range(nodes):
         self.require.qcluster_node(self.name + i, net)
@@ -378,7 +378,7 @@ def qcluster_grandpa(self, name, build, net):
         self.require.qemu_disk(host, disk)
         ]
     ifaces = [
-.        self.require.qcluster_tuntap(host, "ipmi"),
+        self.require.qcluster_tuntap(host, "ipmi"),
         self.require.qcluster_tuntap(host, "data"),
         ]
     self.require.qemu(self.name, host=host, ram=ram, cpu=cpu, disks=disks, ifaces=ifaces)
